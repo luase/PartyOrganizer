@@ -1,0 +1,62 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'events/style.css' %}">
+<div>
+    <h1>
+        {{ users.first_name }} {{ users.last_name }}
+    </h1>
+    <h4>
+        {{ users.email }}
+    </h4>
+</div>
+<div>
+    <div>
+        <h2>
+            <a href="{% url 'events:user_followers' users.id %}">Followers - {{ users.is_followed.count }}</a>
+        </h2>
+    </div>
+    <div>
+        <h2>
+            <a href="{% url 'events:user_following' users.id %}">Following - {{ users.follows.count }}</a>
+        </h2>
+    </div>
+</div>
+<div>
+    <div>
+        <div>
+            <h2>
+                Upcoming events
+            </h2>
+        </div>
+        <div>
+            {% for event in users.going_to.all %}
+            <div>
+                <li>
+                    <a href="{% url 'events:meetup' event.meetup_going.id %}">{{ event.meetup_going.name }}</a>
+                    {{ event.meetup_going.mu_date }}
+                </li>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <div>
+            <h2>
+                Events you created
+            </h2>
+        </div>
+        <div>
+            {% for event in users.events_created.all %}
+            <div>
+                <li>
+                    <a href="{% url 'events:meetup' event.id %}">{{ event.name }}</a>
+                    {{ event.mu_date }}
+                </li>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div>
+    <a href="{% url 'events:index' %}">Change user</a>
+</div>

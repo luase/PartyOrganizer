@@ -1,0 +1,15 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'events/style.css' %}">
+
+{% if user_list %}
+<div>
+  <h1>Select your user</h1><br>
+</div>
+<div>
+  {% for user in user_list %}
+  <li><a href="{% url 'events:user' user.id %}">{{ user.first_name }}</a></li>
+  {% endfor %}
+</div>
+{% else %}
+{% endif %}

@@ -1,0 +1,35 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'events/style.css' %}">
+
+<div>
+    <h1>
+        {{ meetups.name}}
+    </h1>
+    <h4>
+        {{meetups.mu_date}}
+    </h4>
+</div>
+<div>
+    <h2>Description</h2>
+    <div>
+        {{meetups.description}}
+    </div>
+    <div>
+        {{meetups.location}}
+    </div>
+    <div>
+        Created by {{meetups.user_creator}} on {{meetups.created_date}}
+    </div>
+</div>
+<div>
+    <h2>Attendants - {{ meetups.attendees.count }}</h2>
+    <div>
+        {% for attendee in meetups.attendees.all %}
+        <div>
+            {{ attendee.user_going.first_name }}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<a href="{% url 'events:index' %}">Choose user</a>

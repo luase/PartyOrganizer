@@ -1,0 +1,26 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'events/style.css' %}">
+
+<div>
+    <h1>
+        {{ users.first_name }} {{ users.last_name }}
+    </h1>
+</div>
+<div>
+    <div>
+        <h2>
+            Followers - {{ users.is_followed.count }}
+        </h2>
+    </div>
+    <div>
+        {% for follower in users.is_followed.all %}
+        <div>
+            {{ follower.user_b.first_name }} {{ follower.user_b.last_name }}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div>
+    <a href="{% url 'events:user' users.id %}">Go back</a>
+</div>
